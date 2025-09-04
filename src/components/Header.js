@@ -21,6 +21,7 @@ const Header = () => {
         navigate("/error");
       });
   };
+
   return (
     <div className="absolute top-0 left-0 w-full h-24 z-20">
       {/* Gradient overlay across entire header */}
