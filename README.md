@@ -29,6 +29,8 @@
 - Update Store with Trailer Video Data
 - Embedded the youtive video and make it autoPlay and mute
 - Tailwind classes to make Main Container look awesome
+- Made the browser page amazing with tailwind css
+- usePopularMovies custom hook
 
 # Features
 
