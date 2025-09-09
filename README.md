@@ -31,6 +31,9 @@
 - Tailwind classes to make Main Container look awesome
 - Made the browser page amazing with tailwind css
 - usePopularMovies custom hook
+- GPT Search Page
+- GPT Search Bar
+- (BONUS) Multi-Language feature in our App
 
 # Features
 

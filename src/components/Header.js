@@ -5,11 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useEffect } from "react";
+import { toggleGptSearchView } from "../utils/gptSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -44,6 +48,15 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
+  const handleGptSeachClick = () => {
+    // Toggle GPT Search
+    dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="absolute top-0 left-0 w-full h-24 z-20">
       {/* Gradient overlay across entire header */}
@@ -57,6 +70,24 @@ const Header = () => {
         {/* Right: User icon + Sign Out */}
         {user && (
           <div className="flex items-center gap-4">
+            {showGptSearch && (
+              <select
+                className="p-2 m-2 bg-gray-800 text-white rounded-sm"
+                onChange={handleLanguageChange}
+              >
+                {SUPPORTED_LANGUAGES.map((lang) => (
+                  <option key={lang.identifier} value={lang.identifier}>
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            )}
+            <button
+              className="py-2 px-4 m-2 bg-purple-950 text-white rounded-md"
+              onClick={handleGptSeachClick}
+            >
+              {showGptSearch ? "Home" : "GPT Search"}
+            </button>
             <img className="w-8 rounded" alt="userIcon" src={user.photoURL} />
             <button
               className="text-white bg-red-700 px-3 py-1 rounded hover:bg-red-800"

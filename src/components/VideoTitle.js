@@ -15,7 +15,7 @@ const VideoTitle = ({ title, overview }) => {
 
       {/* Buttons */}
       <div className="mt-6 flex space-x-4">
-        <button className="flex items-center bg-white text-black font-semibold py-3 px-8 rounded-sm hover:bg-gray-200 transition">
+        <button className="flex items-center bg-white text-black font-semibold py-3 px-8 rounded-md hover:bg-gray-200 transition">
           ▶️ Play
         </button>
         <button className="flex items-center bg-gray-700 bg-opacity-80 text-white font-semibold py-3 px-8 rounded-md hover:bg-opacity-60 transition">
