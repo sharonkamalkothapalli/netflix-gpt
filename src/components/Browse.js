@@ -10,6 +10,7 @@ const Browse = () => {
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
   useNowPlayingMovies();
   usePopularMovies();
+  console.log(process.env.REACT_APP_TMDB_KEY);
   return (
     <div>
       <Header />
