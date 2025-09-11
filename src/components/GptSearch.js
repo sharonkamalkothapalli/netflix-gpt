@@ -4,7 +4,7 @@ import GptSearchBar from "./GptSearchBar";
 
 const GptSearch = () => {
   return (
-    <div>
+    <div className="">
       <img
         className="fixed w-full h-full -z-10"
         src={BG_URL}

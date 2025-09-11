@@ -19,7 +19,6 @@ const Header = () => {
     signOut(auth)
       .then(() => {})
       .catch((error) => {
-        // An error happened.
         navigate("/error");
       });
   };
@@ -27,20 +26,10 @@ const Header = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
         const { uid, email, displayName, photoURL } = user;
-        dispatch(
-          addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
-        );
+        dispatch(addUser({ uid, email, displayName, photoURL }));
         navigate("/browse");
       } else {
-        // User is signed out
         dispatch(removeUser());
         navigate("/");
       }
@@ -49,7 +38,6 @@ const Header = () => {
   }, []);
 
   const handleGptSeachClick = () => {
-    // Toggle GPT Search
     dispatch(toggleGptSearchView());
   };
 
@@ -58,21 +46,21 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute top-0 left-0 w-full h-24 z-20">
+    <div className="absolute top-0 left-0 w-full min-h-24 z-20">
       {/* Gradient overlay across entire header */}
       <div className="absolute inset-0 bg-gradient-to-b from-black opacity-70"></div>
 
-      {/* Header content: flex container */}
-      <div className="relative z-30 flex items-center justify-between h-full px-6">
+      {/* Header content */}
+      <div className="relative z-30 flex items-center justify-between h-full px-4 md:px-6">
         {/* Left: Logo */}
-        <img className="w-36" src={netflixlogo} alt="Netflix Logo" />
+        <img className="w-24 md:w-36" src={netflixlogo} alt="Netflix Logo" />
 
-        {/* Right: User icon + Sign Out */}
+        {/* Right: User icons + buttons */}
         {user && (
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             {showGptSearch && (
               <select
-                className="p-2 m-2 bg-gray-800 text-white rounded-sm"
+                className="p-1 md:p-2 m-1 md:m-2 bg-gray-800 text-white text-sm md:text-base rounded-sm"
                 onChange={handleLanguageChange}
               >
                 {SUPPORTED_LANGUAGES.map((lang) => (
@@ -83,14 +71,18 @@ const Header = () => {
               </select>
             )}
             <button
-              className="py-2 px-4 m-2 bg-purple-950 text-white rounded-md"
+              className="py-1 px-2 md:py-2 md:px-4 m-1 md:m-2 bg-purple-950 text-white text-sm md:text-base rounded-md"
               onClick={handleGptSeachClick}
             >
               {showGptSearch ? "Home" : "GPT Search"}
             </button>
-            <img className="w-8 rounded" alt="userIcon" src={user.photoURL} />
+            <img
+              className="w-6 md:w-8 rounded"
+              alt="userIcon"
+              src={user.photoURL}
+            />
             <button
-              className="text-white bg-red-700 px-3 py-1 rounded hover:bg-red-800"
+              className="text-white bg-red-700 text-sm md:text-base px-2 py-1 md:px-3 md:py-1 rounded hover:bg-red-800"
               onClick={handleSignOut}
             >
               Sign Out

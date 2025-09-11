@@ -4,7 +4,7 @@ const MovieCard = ({ posterPath }) => {
   if (!posterPath) return null;
 
   return (
-    <div className="w-40 flex-shrink-0 transform hover:scale-105 transition duration-300">
+    <div className=" w-[30%] md:w-40 flex-shrink-0 transform hover:scale-105 transition duration-300">
       <img
         alt="Movie poster"
         src={IMG_CDN + posterPath}
